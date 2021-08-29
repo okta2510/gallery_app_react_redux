@@ -1,0 +1,72 @@
+.albumsGrid {
+  min-height: 180px;
+  display: block;
+  border: solid 1px #ccc;
+}
+.albumsTitle {
+  font-size: 16px;
+  line-height: 20px;
+  color:#000;
+  text-decoration: none;
+}
+
+.albumsTitle:hover,
+.albumsTitle:focus,
+.albumsTitle:visited {
+  color: rgb(72, 72, 72);
+  text-decoration:none;
+}
+
+.albumsGrid  .grid-item {
+  display: inline-block;
+}
+
+.albumsWrap a:hover,
+.albumsWrap a:focus,
+.albumsWrap a:visited {
+  text-decoration:none;
+}
+
+.albumsWrap img {
+  max-width: 100%;
+  height: auto;
+}
+
+.photoGrid {
+  min-height: 180px;
+  display: block;
+}
+.iconFav {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  -webkit-box-shadow: 1px 1px 5px 1px rgba(0,0,0,0.1);
+ box-shadow: 1px 1px 5px 1px rgba(0,0,0,0.1);
+ width: 24px;
+ text-align: center;
+ border-radius: 24px;
+ background: #fff;
+ cursor: pointer;
+}
+.iconComment {
+  position: absolute;
+  left: 45px;
+  top: 10px;
+  -webkit-box-shadow: 1px 1px 5px 1px rgba(0,0,0,0.1);
+ box-shadow: 1px 1px 5px 1px rgba(0,0,0,0.1);
+ width: 24px;
+ text-align: center;
+ border-radius: 24px;
+ background: #fff;
+ cursor: pointer;
+}
+
+.titleLink {
+  color:#000;
+  text-decoration: none;
+}
+
+.jumbotron {
+  padding-top: 30px!important;
+  padding-bottom: 30px!important;
+}
