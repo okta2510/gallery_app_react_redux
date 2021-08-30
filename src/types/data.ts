@@ -30,3 +30,15 @@ export interface CommentData {
   description: string,
   photo: any
 }
+
+
+export interface CommentAllData {
+  photo: {
+    albumId: number,
+    id: number,
+    title: string,
+    url:string,
+    thumbnailUrl:string,
+  },
+  comment: any
+}

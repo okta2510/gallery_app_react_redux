@@ -8,7 +8,7 @@ import { selectComment  }  from "../reducer/CommentReducer"
 const ModalComment = (props: any) => {
 
   const initNewComment = {
-    id: "",
+    id: 0,
     user: "",
     description: "",
     photo: {}
@@ -41,6 +41,8 @@ const ModalComment = (props: any) => {
     const { name, value } = event.target;
     setCommentData({ ...comment, [name]: value });
   };
+
+  let selectedComment:any = props.id ?  stateProps.commentData.filter(el => el.photo.id === props.id) : []
   
   return (
     <div>
@@ -53,7 +55,7 @@ const ModalComment = (props: any) => {
                 <h5 className="modal-title">
                   {props.title || '-'}
                 </h5>
-                <small>Comments ({stateProps.comment.length || 0})</small>
+                <small>Comments ({selectedComment.length ?  selectedComment[0].comment.length : 0})</small>
               </div>
               <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">
@@ -63,7 +65,7 @@ const ModalComment = (props: any) => {
             </div>
             <div className="modal-body">
               <div className="comment-list">
-                {stateProps && stateProps.comment.length > 0 ? (stateProps.comment.map((el, index) => (<div key={`list-comment-${index}`} className="list-group">
+                {selectedComment.length > 0 ? (selectedComment[0].comment.map((el:any, index:any) => (<div key={`list-comment-${index}`} className="list-group">
                   <div className="d-flex w-100 justify-content-between">
                     <h5 className="mb-1">{el.user}</h5>
                     <small>3 days ago</small>

@@ -80,6 +80,11 @@ function AlbumDetail(props: Props) {
   const handleAddCollection = (photo: any) => {
     dispatch(addCollection(photo));
   }
+
+  const checkAnyComment = (id: number) => {
+    const found = CommentProps.commentData.filter(el => el.photo.id === id)
+    return found.length > 0 ?  true : false;
+  }
   
   const handleAddComment = (obj: object | null) => {
     let modal:any = document.getElementById("myModal");
@@ -116,7 +121,7 @@ function AlbumDetail(props: Props) {
                         <FontAwesomeIcon icon="heart" color={CollectionProps.collection.length > 0 && CollectionProps.collection.find(fav => fav.id === el.id) ?  '#F63345' : '#ccc'} onClick={()=>{handleAddCollection(el)}}/>
                       </span>
                       <span className={`cursor-pointer ${styles.iconComment}`} data-toggle="modal" data-target="#exampleModal">
-                        <FontAwesomeIcon className="open-modal" icon="comment" color={CommentProps.comment.length >  0 ? '#06d675' :  '#ccc'} onClick={()=>{handleAddComment(el)}}/>
+                        <FontAwesomeIcon className="open-modal" icon="comment" color={checkAnyComment(el.id) ? '#06d675' :  '#ccc'} onClick={()=>{handleAddComment(el)}}/>
                       </span>
                       <img src={el.url} alt={el.title} className=""/>
                     </div>
