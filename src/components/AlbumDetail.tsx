@@ -20,12 +20,22 @@ interface RouterProps {
 type Props = RouteComponentProps<RouterProps>;
 
 function AlbumDetail(props: Props) {
-  const stateProps = useAppSelector(selectCollection)
+  
+  const InitState = {
+    id: '',
+    albumId: '',
+    title: '',
+    url: '',
+    name: '',
+  }
+  const CollectionProps = useAppSelector(selectCollection)
+  const CommentProps = useAppSelector(selectCollection)
   const dispatch = useAppDispatch();
 
   const [currentPhotos, setPhotos] = useState<Array<PhotosData>>([]);
   const [albums, setAlbums] = useState<AlbumData>();
   const [user, setUser] = useState<UserData>();
+  const [comment, setCurrentComment] = useState<any>(InitState);
 
   const getAlbumPhotos = (id: string) => {
     PhotosDataService.get(id)
@@ -64,17 +74,18 @@ function AlbumDetail(props: Props) {
     getAlbumPhotos(props.match.params.id);
     getCurrentAlbum(props.match.params.id);
     getCurrentUser(props.match.params.id);
+
   }, [props.match.params.id]);
 
   const handleAddCollection = (photo: any) => {
     dispatch(addCollection(photo));
   }
-
-  const handleAddComment = () => {
-    window.location.href = "#openModal";
+  
+  const handleAddComment = (obj: object | null) => {
+    let modal:any = document.getElementById("myModal");
+    setCurrentComment(obj)
+    modal.style.display = "block";
   }
-
-  console.log(user)
   
   return (
     <div className="">
@@ -101,11 +112,11 @@ function AlbumDetail(props: Props) {
                   className={"col-sm-6 col-md-4 col-lg-3 mb-4"} key={index}
                 >
                     <div className={`card mb-1 w-100 d-block postion-relative ${styles.photoGrid}`}>
-                      <span className={`cursor-pointer ${styles.iconFav}`}>
-                        <FontAwesomeIcon icon="heart" color={stateProps.collection.length > 0 && stateProps.collection.find(fav => fav.id === el.id) ?  '#F63345' : '#ccc'} onClick={()=>{handleAddCollection(el)}}/>
+                      <span  className={`cursor-pointer ${styles.iconFav}`}>
+                        <FontAwesomeIcon icon="heart" color={CollectionProps.collection.length > 0 && CollectionProps.collection.find(fav => fav.id === el.id) ?  '#F63345' : '#ccc'} onClick={()=>{handleAddCollection(el)}}/>
                       </span>
                       <span className={`cursor-pointer ${styles.iconComment}`} data-toggle="modal" data-target="#exampleModal">
-                        <FontAwesomeIcon icon="comment" color={'#ccc'} onClick={()=>{handleAddComment()}}/>
+                        <FontAwesomeIcon className="open-modal" icon="comment" color={CommentProps.comment.length >  0 ? '#06d675' :  '#ccc'} onClick={()=>{handleAddComment(el)}}/>
                       </span>
                       <img src={el.url} alt={el.title} className=""/>
                     </div>
@@ -113,7 +124,7 @@ function AlbumDetail(props: Props) {
               ))}
           </div>
       </div>
-     <ModalComment />
+      {currentPhotos && albums && <ModalComment {...comment}/>}
     </div>
   ) 
 }

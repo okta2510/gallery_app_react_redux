@@ -22,3 +22,11 @@ export interface PhotosData {
   url: string,
   name: string,
 }
+
+
+export interface CommentData {
+  id?: any | null,
+  user: string,
+  description: string,
+  photo: any
+}
