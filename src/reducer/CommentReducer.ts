@@ -15,6 +15,7 @@ const initialState: Array<CommentAllData> = [
       id: 1,
       user: "okta 1",
       description: "desc 1",
+      date: 'Mon, 30 Aug 2021 12:10:59'
     }]
   },
   {
@@ -28,19 +29,18 @@ const initialState: Array<CommentAllData> = [
         id: 1,
         user: "okta 2",
         description: "desc 2",
+        date: 'Mon, 30 Aug 2021 12:10:59'
       }]
     }
 ]
 
 export const CommentReducer = createSlice({
-  name: 'Comment Usesr',
+  name: 'Comment User',
   // `createSlice` will infer the state type from the `initialState` argument
   initialState,
   reducers: {
     addNewComment: (state, action: PayloadAction<CommentAllData>) => {
-      // if(!state.find(fav =>  fav.id === action.payload.id)) {
-      //   state.push(action.payload)
-      // }
+      state.push(action.payload)
     }
   }
 })

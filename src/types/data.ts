@@ -23,12 +23,16 @@ export interface PhotosData {
   name: string,
 }
 
+export interface PhotoSingleData {
+  photo: any
+}
+
 
 export interface CommentData {
   id?: any | null,
   user: string,
   description: string,
-  photo: any
+  date: string
 }
 
 
